@@ -1,2 +1,2 @@
 # arbre_coeur
-Résolution du problème de l'arbre coeur via un algorithme génétique
+Résolution du problème de l'arbre coeur via un algorithme génétique.
