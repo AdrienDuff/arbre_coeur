@@ -8,7 +8,7 @@ import math
 with open('tab_coord', 'rb') as fichier:
 	mon_depickler = pickle.Unpickler(fichier)
 	tab_coord = mon_depickler.load()
-	n_sommet = mon_depickler.load()
+	nb_sommet = mon_depickler.load()
 
 def distance(sommet1,sommet2):
 	"Calcul la distance en kilomètre entre deux sommets"

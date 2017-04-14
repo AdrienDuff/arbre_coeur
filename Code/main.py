@@ -1,12 +1,18 @@
-#!/usr/bin/python
+#!/usr/bin/python3.4
 # -*-coding:Utf-8 -*
 
 import numpy as np
-from donnees import *
+import pickle
+import sys
+sys.path.append("../Donnees")
+sys.path.append("../Dessin_graphe")
+from selection_donnees import *
+from dessine_graphe import * 
 
-print a
+with open('../Donnees/tab_coord', 'rb') as fichier:
+	mon_depickler = pickle.Unpickler(fichier)
+	tab_coord = mon_depickler.load()
+	nb_sommet_total = mon_depickler.load()
 
-
-
-
-
+tab_sommets = select_sample(nb_sommet_total,400)
+dessine_graphe(tab_sommets, tab_coord)
