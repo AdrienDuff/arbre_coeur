@@ -14,5 +14,5 @@ with open('../Donnees/tab_coord', 'rb') as fichier:
 	tab_coord = mon_depickler.load()
 	nb_sommet_total = mon_depickler.load()
 
-tab_sommets = select_sample(nb_sommet_total,400)
+tab_sommets = select_sample(nb_sommet_total,5000)
 dessine_graphe(tab_sommets, tab_coord)
