@@ -14,5 +14,10 @@ with open('../Donnees/tab_coord', 'rb') as fichier:
 	tab_coord = mon_depickler.load()
 	nb_sommet_total = mon_depickler.load()
 
-tab_sommets = select_sample(nb_sommet_total,5000)
-dessine_graphe(tab_sommets, tab_coord)
+with open('../Donnees/tab_cout1', 'rb') as fichier:
+	mon_depickler = pickle.Unpickler(fichier)
+	tab_cout1 = mon_depickler.load()
+
+tab_sommets = select_sample(nb_sommet_total,100)
+
+#dessine_graphe(tab_sommets, tab_coord)
