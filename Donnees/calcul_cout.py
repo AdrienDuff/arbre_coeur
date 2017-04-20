@@ -6,13 +6,9 @@ import pickle
 import math
 from scipy import sparse
 
-with open('tab_coord', 'rb') as fichier:
-	mon_depickler = pickle.Unpickler(fichier)
-	tab_coord = mon_depickler.load()
-	nb_sommet_total = mon_depickler.load()
 
 def distance(sommet1,sommet2):
-	"Calcul la distance en kilomètre entre deux sommets"
+	"Calcul la distance en kilomètres entre deux sommets"
 	x1 = tab_coord[sommet1][1]
 	y1 = tab_coord[sommet1][2]
 	x2 = tab_coord[sommet2][1]
@@ -47,34 +43,41 @@ def setcout(tab_cout,sommet1,sommet2,valeur):
 	indice = int((sommet1 - 2)*(sommet1 - 1)/2 + sommet2 - 1)
 	tab_cout[indice] = valeur
 
-#tab_cout1 = np.zeros((nb_sommet_total + 1, nb_sommet_total +1),dtype=np.uint8)
 
-#On utilise un tableau à une dimension pour stocker seulement les bons coefficients.
-#Les couts sont stockes sur 8 bytes pour que cela prenne moins de place
-tab_cout1 = np.zeros(int((nb_sommet_total*(nb_sommet_total-1))/2), dtype = np.uint8)
-tab_cout2 = np.zeros(int((nb_sommet_total*(nb_sommet_total-1))/2), dtype = np.uint8)
+if __name__ == "__main__":
+	with open('tab_coord', 'rb') as fichier:
+		mon_depickler = pickle.Unpickler(fichier)
+		tab_coord = mon_depickler.load()
+		nb_sommet_total = mon_depickler.load()
 
-#On rempli la matrice triangulaire inferieur
-for i in range(2, nb_sommet_total + 1):
-	print(i)
-	for j in range(1, i):
-		setcout(tab_cout1, i, j, calcul_cout1(i,j))
-		setcout(tab_cout2, i, j, calcul_cout2(i,j))
+	#tab_cout1 = np.zeros((nb_sommet_total + 1, nb_sommet_total +1),dtype=np.uint8)
+
+	#On utilise un tableau à une dimension pour stocker seulement les bons coefficients.
+	#Les couts sont stockes sur 8 bytes pour que cela prenne moins de place
+	tab_cout1 = np.zeros(int((nb_sommet_total*(nb_sommet_total-1))/2), dtype = np.uint8)
+	tab_cout2 = np.zeros(int((nb_sommet_total*(nb_sommet_total-1))/2), dtype = np.uint8)
+
+	#On rempli la matrice triangulaire inferieur
+	for i in range(2, nb_sommet_total + 1):
+		print(i)
+		for j in range(1, i):
+			setcout(tab_cout1, i, j, calcul_cout1(i,j))
+			setcout(tab_cout2, i, j, calcul_cout2(i,j))
 
 
-print("")
-print(getcout(tab_cout1, 14, 2))
-print(getcout(tab_cout1, 2, 14))
+	print("")
+	print(getcout(tab_cout1, 14, 2))
+	print(getcout(tab_cout1, 2, 14))
 
 
-with open('tab_cout1', 'wb') as fichier:
-	mon_pickler = pickle.Pickler(fichier)
-	mon_pickler.dump(tab_cout1)
+	with open('tab_cout1', 'wb') as fichier:
+		mon_pickler = pickle.Pickler(fichier)
+		mon_pickler.dump(tab_cout1)
 
-print("")
-print(getcout(tab_cout2, 14, 2))
-print(getcout(tab_cout2, 2, 14))
+	print("")
+	print(getcout(tab_cout2, 14, 2))
+	print(getcout(tab_cout2, 2, 14))
 
-with open('tab_cout2', 'wb') as fichier:
-	mon_pickler = pickle.Pickler(fichier)
-	mon_pickler.dump(tab_cout2)
+	with open('tab_cout2', 'wb') as fichier:
+		mon_pickler = pickle.Pickler(fichier)
+		mon_pickler.dump(tab_cout2)
