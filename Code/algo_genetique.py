@@ -62,7 +62,7 @@ class AlgoGenetique(object):
 	def genere_poids(self):
 		tab = []
 		for i in range(1,taillePop):
-			tab.extend([i]*(int((3/2)*i)))
+			tab.extend([i]*(int((1/2)*i)))
 		self.indice_weighted = tab
 
 	def generePopInitiale(self, dessin = False, countTime = False):
@@ -214,7 +214,7 @@ class AlgoGenetique(object):
 				num_Arbre += 2
 		#1/4 des arbres viennent des meilleurs de la génération précédente
 		if self.Mselection == "selection2":
-			nb_croisement = int(self.taillePop*(9/10))
+			nb_croisement = int(self.taillePop*(95/100))
 			if nb_croisement % 2 == 1:
 				nb_croisement = nb_croisement + 1
 			num_Arbre = 1
@@ -325,18 +325,18 @@ class AlgoGenetique(object):
 
 if __name__ == "__main__":
 
-	nb_sommet = 500
+	nb_sommet = 6000
 
-	n_proche = 160 # pour algo primAlea
+	n_proche = 300 # pour algo primAlea
 
-	nb_chemin = 5 # pour algo de croisement
-	longeur_chemin_max = 10
+	nb_chemin = 2 # pour algo de croisement
+	longeur_chemin_max = 30
 
-	taillePop = 40 # IL faut un nombre pair
-	nb_generation = 2000
+	taillePop = 24 # IL faut un nombre pair
+	nb_generation = 2500
 
-	rayon_mut = 120 #Rayon de mutation possible
-	proba_mut = 0.3
+	rayon_mut = 100 #Rayon de mutation possible
+	proba_mut = 0.18
 	methode_ini = "primAlea3"
 	#methode_ini = "prim"
 	methode_selection = "selection2"
@@ -373,23 +373,27 @@ if __name__ == "__main__":
 	#testAlgo2.tab_population[-1].dessine_toi(tab_sommets, tab_coord)
 	#arbres = testAlgo.select2Tree()
 	print("croisement")
-	#testAlgo.croisement(arbres[0], arbres[1], dessin = True, countTime = True)
+	#testAlgo.tab_population[-2].dessine_toi(tab_sommets, tab_coord)
+	#testAlgo.tab_population[-3].dessine_toi(tab_sommets, tab_coord)
+	#testAlgo.croisement2Arbre(testAlgo.tab_population[-2], testAlgo.tab_population[-3],1, dessin = True, countTime = True)
 	#testAlgo.croisementAll(countTime = True)
 	#testAlgo.nextnGeneration(10)
 	
-	#testAlgo.solve_with_cplex()
-	#testAlgo.Tree_Cplex.calcul_cout()
-	#testAlgo.Tree_Cplex.dessine_toi(tab_sommets, tab_coord)
+	
 
 
 	testAlgo.lance_algo()
 	print("Fait")
-	testAlgo.dessine_evolution_cout("1")
+	#testAlgo.solve_with_cplex()
+	#testAlgo.Tree_Cplex.calcul_cout()
+	#testAlgo.Tree_Cplex.dessine_toi(tab_sommets, tab_coord)
+	testAlgo.dessine_evolution_cout("2")
 	testAlgo.bestTree.dessine_toi(tab_sommets, tab_coord)
+
 
 	#testAlgo2.lance_algo()
 	#testAlgo2.dessine_evolution_cout("2")
-	#testAlgo.bestTree.dessine_toi(tab_sommets, tab_coord)
+	#testAlgo2.bestTree.dessine_toi(tab_sommets, tab_coord)
 	#testAlgo.Tree_Cplex.dessine_toi(tab_sommets, tab_coord)
 	#print(testAlgo.evolution_cout)
 	#testAlgo.select2Tree()
